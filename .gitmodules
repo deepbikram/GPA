@@ -1,0 +1,3 @@
+[submodule "GPA-CALCULATOR"]
+    path = GPA
+    url = https://github.com/deepbikram/GPA
