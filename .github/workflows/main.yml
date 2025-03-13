@@ -1,24 +1,21 @@
+name: Deploy to GitHub Pages
 on:
   push:
     branches:
-     - master
-name: 🚀 Deploy website on push
+      - master
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2.3.2
-    
-    - name: 🔨 Build Project
-      run: |
-        npm install
-        npm run build
-        mv dist/* . && rm -r dist
-
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@v4.0.0
-      with:
-        server: ${{ secrets.GITHUB_TOKEN }}
-        local-dir: ./
+      - name: Checkout
+        uses: actions/checkout@v3
+      
+      - name: Install and Build
+        run: |
+          npm install
+          npm run build
+      
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
